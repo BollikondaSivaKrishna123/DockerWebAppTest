@@ -22,4 +22,10 @@ public class UserController {
         model.addAttribute("message", "User "+user.getUsername()+ " registered successfully...");
         return "result";
     }
+
+    @GetMapping("/welcome")
+    public String showWelcomePage(Model model) {
+        model.addAttribute("message", "Welcome to Docker.. ");
+        return "result";
+    }
 }
