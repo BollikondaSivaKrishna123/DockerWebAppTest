@@ -1,6 +1,15 @@
+# Use the official Tomcat base image
+FROM tomcat:9-jdk17
 
-FROM tomcat:10.1-jre11
-# Copy the packaged jar file into the container at /app
-COPY target/DockerTestWebApp.war /usr/local/tomcat/webapp/my-docker-webapp.war
-# Expose the port the application runs on
+# Remove the default web applications
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copy your WAR file to the webapps directory
+COPY target/DockerTestWebApp.war /usr/local/tomcat/webapps/ROOT.war
+
+# Expose the port Tomcat is running on
 EXPOSE 8080
+
+# Start Tomcat server
+CMD ["catalina.sh", "run"]
+
